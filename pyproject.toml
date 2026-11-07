@@ -19,6 +19,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+contract-mock-server = "contract_mock_server.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/Trysac/u195-contract-mock-server"
 Source = "https://github.com/Trysac/u195-contract-mock-server"

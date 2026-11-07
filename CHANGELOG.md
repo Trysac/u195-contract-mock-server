@@ -9,4 +9,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Add consumer contract mock server with path templates, subset matching, Decimal preservation, and daemon HTTP server.
 - Initial project structure from the factory utility template.
