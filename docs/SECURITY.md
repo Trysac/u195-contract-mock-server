@@ -1,19 +1,12 @@
 # Security notes
 
-## Threat model
+## Threat Model
 
-`trysac-contract-mock-server` is a pure library without I/O. The main risks are:
+This utility is a library that operates without network access (except for the optional `serve` server) and has no runtime dependencies (stdlib only).
 
-- **Supply chain**: a compromised dependency or CI action. Mitigation: no runtime dependencies,
-  Dependabot weekly updates, actions pinned to major versions, minimal workflow permissions.
-- **Leaked secrets**: tokens committed by mistake. Mitigation: `gitleaks` runs in the local gates
-  and in CI; `.env` files are git-ignored.
-- **Untrusted input**: callers may pass hostile strings. Mitigation: validate input and fail with
-  explicit exceptions; never `eval`, `exec` or deserialize untrusted data.
+### Defended
+- **Untrusted input**: `load_contract` validates input against a schema and enforces strict size limits (`MAX_CONTRACT_BYTES`) and recursion depth (`MAX_CONTRACT_DEPTH`).
+- **JSON Injection**: The standard library `json` module is used for parsing/serializing.
 
-## Publishing
-
-Releases are published to PyPI with trusted publishing (OIDC) when available, never with a
-long-lived token stored in the repository.
-
-To report a vulnerability, see [SECURITY.md](../SECURITY.md).
+### Not Defended
+- **Denial of Service**: The HTTP server accepts any valid connection. While individual requests are bounded by `max_body_bytes`, extreme request volume could exhaust local resources.
