@@ -4,8 +4,10 @@ Mock HTTP server from consumer contract files. Solves the problem of frontend an
 
 ## Installation
 
+Not published to PyPI yet. Install it from GitHub:
+
 ```bash
-pip install contract-mock-server
+pip install "git+https://github.com/Trysac/u195-contract-mock-server"
 ```
 
 ## Usage
